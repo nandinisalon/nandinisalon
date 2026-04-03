@@ -1,0 +1,22 @@
+.app {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--white);
+}
+
+/* Global Section Transitions */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+section:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--light) 50%, transparent 100%);
+  opacity: 0.5;
+}

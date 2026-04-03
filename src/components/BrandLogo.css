@@ -1,0 +1,78 @@
+.brand-logo {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--black);
+}
+
+.brand-logo.invert {
+  color: var(--white);
+}
+
+.brand-logo-wordmark {
+  display: inline-flex;
+  align-items: flex-end;
+  line-height: 0.9;
+}
+
+.brand-logo-glyph {
+  font-family: 'Noto Serif Devanagari', 'Nirmala UI', serif;
+  font-size: clamp(46px, 5vw, 78px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-right: 2px;
+}
+
+.brand-logo-latin {
+  font-family: var(--serif);
+  font-size: clamp(46px, 5vw, 82px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.brand-logo-salon {
+  font-weight: 300;
+  margin-left: 6px;
+}
+
+.brand-logo-tagline {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: color-mix(in srgb, currentColor 78%, transparent);
+  padding-left: 6px;
+}
+
+.brand-logo.compact {
+  gap: 2px;
+}
+
+.brand-logo.compact .brand-logo-glyph {
+  font-size: 34px;
+  margin-right: 2px;
+}
+
+.brand-logo.compact .brand-logo-latin {
+  font-size: 34px;
+  letter-spacing: 0.01em;
+}
+
+.brand-logo.compact .brand-logo-tagline {
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  padding-left: 2px;
+}
+
+@media (max-width: 768px) {
+  .brand-logo.compact .brand-logo-glyph {
+    font-size: 28px;
+  }
+
+  .brand-logo.compact .brand-logo-latin {
+    font-size: 28px;
+  }
+
+  .brand-logo.compact .brand-logo-tagline {
+    font-size: 7px;
+  }
+}

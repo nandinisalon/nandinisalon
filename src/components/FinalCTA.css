@@ -1,0 +1,56 @@
+.final-cta {
+  text-align: center;
+  padding: 100px 64px;
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.final-cta::before {
+  content: 'नंदिनी';
+  position: absolute;
+  font-family: var(--serif);
+  font-size: 280px;
+  font-weight: 300;
+  color: rgba(10, 10, 10, 0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.final-title {
+  font-family: var(--serif);
+  font-size: clamp(40px, 6vw, 88px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.final-title em {
+  font-style: italic;
+}
+
+.final-cta .btn {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .final-cta {
+    padding: 80px 28px;
+  }
+
+  .final-cta::before {
+    font-size: 120px;
+  }
+
+  .final-title {
+    font-size: clamp(32px, 5vw, 52px);
+  }
+}
