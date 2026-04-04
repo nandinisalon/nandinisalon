@@ -207,25 +207,36 @@
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
-    padding: 52px 0 0 0;
+    padding: 94px 0 0 0;
   }
 
   .hero-wrapper {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 28px 28px 10px;
+    gap: 24px;
+    padding: 20px 20px 10px;
   }
 
   .hero-content {
     gap: 20px;
+    max-width: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.24em;
   }
 
   .hero-title {
     font-size: clamp(36px, 10vw, 52px);
   }
 
+  .hero-sub {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
   .hero-image-section {
-    height: 400px;
+    height: 340px;
   }
 
   .hero-image-placeholder {
@@ -246,7 +257,6 @@
   }
 
   .hero-scroll-indicator {
-    left: 28px;
-    bottom: 10px;
+    display: none;
   }
 }

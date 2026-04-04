@@ -43,11 +43,11 @@
 
 @media (max-width: 768px) {
   .brand-logo-wordmark {
-    width: min(260px, 72vw);
+    width: min(220px, 62vw);
   }
 
   .brand-logo.compact .brand-logo-wordmark {
-    width: min(180px, 44vw);
+    width: clamp(118px, 32vw, 150px);
   }
 
   .brand-logo.compact .brand-logo-tagline {

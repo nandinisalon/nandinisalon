@@ -16,7 +16,6 @@ function Hero() {
             A space where
             <br />
             <em>every woman</em>
-            <br />
             feels beautiful.
           </h1>
           <p className="hero-sub">Discover premium beauty & grooming services crafted for you.</p>

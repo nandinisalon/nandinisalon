@@ -4,7 +4,7 @@ import './Trust.css'
 const trustItems = [
   { number: '15+', label: 'Years Experience' },
   { number: 'VLCC', label: 'Certified Professional', isItalic: true },
-  { number: '∞', label: 'Repeat Client Trust' },
+  { number: '\u221E', label: 'Repeat Client Trust' },
 ]
 
 function Trust({ inline = false }) {

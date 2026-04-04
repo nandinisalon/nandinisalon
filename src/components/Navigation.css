@@ -56,18 +56,38 @@
 
 @media (max-width: 768px) {
   .navigation {
-    padding: 24px 28px;
+    padding: 14px 16px;
   }
 
   .nav-logo {
-    max-width: 180px;
+    max-width: 140px;
   }
 
   .nav-links {
-    gap: 12px;
+    gap: 10px;
   }
 
   .nav-link {
-    font-size: 10px;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (max-width: 420px) {
+  .navigation {
+    padding: 12px 14px;
+  }
+
+  .nav-logo {
+    max-width: 126px;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 8px;
+    letter-spacing: 0.12em;
   }
 }

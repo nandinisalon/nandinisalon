@@ -68,8 +68,16 @@
 .service-gallery-viewport,
 .service-video-viewport {
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 6px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.service-gallery-viewport::-webkit-scrollbar,
+.service-video-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .service-gallery-viewport::before,
@@ -102,18 +110,6 @@
   display: flex;
   width: max-content;
   gap: var(--rail-gap);
-  animation: marqueeSlide 40s linear infinite;
-  will-change: transform;
-}
-
-.service-video-track {
-  animation-duration: 46s;
-  animation-direction: reverse;
-}
-
-.service-gallery-track:hover,
-.service-video-track:hover {
-  animation-play-state: paused;
 }
 
 .service-gallery-group {
@@ -171,15 +167,6 @@
   color: var(--mid);
 }
 
-@keyframes marqueeSlide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - (var(--rail-gap) / 2)));
-  }
-}
-
 @media (max-width: 768px) {
   .service-gallery {
     --rail-gap: 16px;
@@ -204,14 +191,6 @@
   .service-video-viewport::before,
   .service-video-viewport::after {
     width: 36px;
-  }
-
-  .service-gallery-track {
-    animation-duration: 30s;
-  }
-
-  .service-video-track {
-    animation-duration: 36s;
   }
 
   .service-gallery-card {

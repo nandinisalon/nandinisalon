@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './ServiceGallery.css'
 
 const imageModules = import.meta.glob('../assets/service-gallery/*.{jpg,jpeg,png,webp}', {
@@ -15,6 +15,10 @@ const categoryBadges = ['Hair', 'Nails', 'Makeup', 'Skin', 'Laser', 'Grooming', 
 
 function ServiceGallery() {
   const [isVisible, setIsVisible] = useState(false)
+  const photoViewportRef = useRef(null)
+  const photoGroupRef = useRef(null)
+  const videoViewportRef = useRef(null)
+  const videoGroupRef = useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,6 +65,86 @@ function ServiceGallery() {
     []
   )
 
+  useEffect(() => {
+    const setupManualInfiniteScroll = (viewport, group) => {
+      if (!viewport || !group) {
+        return () => {}
+      }
+
+      let isAdjusting = false
+
+      const getGroupSpan = () => {
+        const track = group.parentElement
+        if (!track) {
+          return 0
+        }
+
+        const styles = window.getComputedStyle(track)
+        const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0
+        return group.offsetWidth + gap
+      }
+
+      const resetToMiddle = () => {
+        const span = getGroupSpan()
+        if (!span) {
+          return
+        }
+        viewport.scrollLeft = span
+      }
+
+      const handleScroll = () => {
+        if (isAdjusting) {
+          return
+        }
+
+        const span = getGroupSpan()
+        if (!span) {
+          return
+        }
+
+        if (viewport.scrollLeft < span * 0.5) {
+          isAdjusting = true
+          viewport.scrollLeft += span
+          isAdjusting = false
+        } else if (viewport.scrollLeft > span * 1.5) {
+          isAdjusting = true
+          viewport.scrollLeft -= span
+          isAdjusting = false
+        }
+      }
+
+      const handleWheel = (event) => {
+        if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+          event.preventDefault()
+          viewport.scrollLeft += event.deltaY
+        }
+      }
+
+      const handleResize = () => {
+        resetToMiddle()
+      }
+
+      resetToMiddle()
+      viewport.addEventListener('scroll', handleScroll, { passive: true })
+      viewport.addEventListener('wheel', handleWheel, { passive: false })
+      window.addEventListener('resize', handleResize)
+
+      return () => {
+        viewport.removeEventListener('scroll', handleScroll)
+        viewport.removeEventListener('wheel', handleWheel)
+        window.removeEventListener('resize', handleResize)
+      }
+    }
+
+    const cleanupPhoto = setupManualInfiniteScroll(photoViewportRef.current, photoGroupRef.current)
+    const cleanupVideo = setupManualInfiniteScroll(videoViewportRef.current, videoGroupRef.current)
+
+    return () => {
+      cleanupPhoto()
+      cleanupVideo()
+    }
+  }, [galleryItems.length, videoItems.length])
+
   return (
     <section className={`service-gallery ${isVisible ? 'visible' : ''}`}>
       <div className="service-gallery-inner">
@@ -84,9 +168,24 @@ function ServiceGallery() {
         </div>
 
         <div className="service-gallery-showcase">
-          <div className="service-gallery-viewport" aria-label="Scrolling photo gallery">
+          <div
+            className="service-gallery-viewport"
+            aria-label="Manual scrolling photo gallery"
+            ref={photoViewportRef}
+          >
             <div className="service-gallery-track">
-              <div className="service-gallery-group">
+              <div className="service-gallery-group" aria-hidden="true">
+                {galleryItems.map((item) => (
+                  <figure className="service-gallery-card" key={`${item.id}-head-duplicate`}>
+                    <img className="service-gallery-media" src={item.image} alt="" loading="lazy" />
+                    <figcaption className="service-gallery-card-copy">
+                      <span className="service-gallery-card-note">{item.displayNumber}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+
+              <div className="service-gallery-group" ref={photoGroupRef}>
                 {galleryItems.map((item) => (
                   <figure className="service-gallery-card" key={item.id}>
                     <img className="service-gallery-media" src={item.image} alt={item.alt} loading="lazy" />
@@ -99,7 +198,7 @@ function ServiceGallery() {
 
               <div className="service-gallery-group" aria-hidden="true">
                 {galleryItems.map((item) => (
-                  <figure className="service-gallery-card" key={`${item.id}-duplicate`}>
+                  <figure className="service-gallery-card" key={`${item.id}-tail-duplicate`}>
                     <img className="service-gallery-media" src={item.image} alt="" loading="lazy" />
                     <figcaption className="service-gallery-card-copy">
                       <span className="service-gallery-card-note">{item.displayNumber}</span>
@@ -111,9 +210,32 @@ function ServiceGallery() {
           </div>
 
           {videoItems.length > 0 && (
-            <div className="service-video-viewport" aria-label="Scrolling video gallery">
+            <div
+              className="service-video-viewport"
+              aria-label="Manual scrolling video gallery"
+              ref={videoViewportRef}
+            >
               <div className="service-video-track">
-                <div className="service-gallery-group">
+                <div className="service-gallery-group" aria-hidden="true">
+                  {videoItems.map((item) => (
+                    <figure className="service-video-card" key={`${item.id}-head-duplicate`}>
+                      <video
+                        className="service-video-media"
+                        src={item.video}
+                        muted
+                        loop
+                        playsInline
+                        autoPlay
+                        preload="metadata"
+                      />
+                      <figcaption className="service-video-card-copy">
+                        <span className="service-gallery-card-note">{item.displayNumber}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+
+                <div className="service-gallery-group" ref={videoGroupRef}>
                   {videoItems.map((item) => (
                     <figure className="service-video-card" key={item.id}>
                       <video
@@ -134,7 +256,7 @@ function ServiceGallery() {
 
                 <div className="service-gallery-group" aria-hidden="true">
                   {videoItems.map((item) => (
-                    <figure className="service-video-card" key={`${item.id}-duplicate`}>
+                    <figure className="service-video-card" key={`${item.id}-tail-duplicate`}>
                       <video
                         className="service-video-media"
                         src={item.video}
