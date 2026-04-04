@@ -10,11 +10,6 @@ function Footer() {
           <div className="footer-brand">
             <BrandLogo invert />
           </div>
-          <p className="footer-tagline">
-            "A space built through
-            <br />
-            resilience, for you."
-          </p>
         </div>
         <div className="footer-col">
           <div className="footer-col-title">Visit Us</div>
@@ -30,8 +25,14 @@ function Footer() {
               <br />
               Secunderabad, Telangana 500026
             </a>
-            <br />
+          </div>
+        </div>
+        <div className="footer-col">
+          <div className="footer-col-title">Contact</div>
+          <div className="footer-info">
             <a href="tel:+916305652525">+91 63056 52525</a>
+            <br />
+            <a href="mailto:nandinisalon26@gmail.com">nandinisalon26@gmail.com</a>
           </div>
         </div>
         <div className="footer-col">
@@ -46,7 +47,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 Nandini Salon Parlour</span>
+        <span>(c) 2026 Nandini Salon Parlour</span>
         <span>Secunderabad | Telangana</span>
       </div>
     </footer>

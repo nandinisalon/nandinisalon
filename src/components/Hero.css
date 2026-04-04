@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 80px 0 0 0;
+  padding: 68px 0 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -32,7 +32,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
-  padding: 60px 64px;
+  padding: 40px 64px 20px;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
@@ -131,13 +131,7 @@
 }
 
 .hero-image-placeholder::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 36%),
-    linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
-  animation: shimmerEffect 3s infinite;
+  display: none;
 }
 
 .hero-image-placeholder::after {
@@ -159,65 +153,14 @@
   top: 22px;
   right: 22px;
   z-index: 2;
-  width: 136px;
-  padding: 10px 10px 18px;
-  background: linear-gradient(180deg, rgba(14, 14, 14, 0.92) 0%, rgba(28, 26, 24, 0.82) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 16px 34px rgba(10, 10, 10, 0.18);
-  backdrop-filter: blur(10px);
+  width: 132px;
+  filter: drop-shadow(0 16px 34px rgba(10, 10, 10, 0.18));
 }
 
-.hero-cert-title {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.hero-cert-logo {
-  margin-top: 3px;
-  font-family: var(--sans);
-  font-size: 34px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  color: #f28a38;
-}
-
-.hero-cert-school {
-  margin-top: 5px;
-  padding: 4px 8px;
-  background: linear-gradient(180deg, #1858b8 0%, #11479a 100%);
-  border-radius: 999px;
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #f5f7fa;
-}
-
-.hero-cert-ribbon {
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  width: 34px;
-  height: 22px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, #dca14a 0%, #c9862d 100%);
-  clip-path: polygon(0 0, 100% 0, 78% 100%, 50% 74%, 22% 100%);
-  box-shadow: 0 8px 16px rgba(10, 10, 10, 0.12);
-}
-
-@keyframes shimmerEffect {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+.hero-cert-badge-image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .hero-image {
@@ -264,13 +207,13 @@
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
-    padding: 60px 0 0 0;
+    padding: 52px 0 0 0;
   }
 
   .hero-wrapper {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 40px 28px;
+    gap: 28px;
+    padding: 28px 28px 10px;
   }
 
   .hero-content {
@@ -286,35 +229,14 @@
   }
 
   .hero-image-placeholder {
-    padding: 20px 18px 0;
+    padding: 18px 18px 0;
     border-radius: 24px;
   }
 
   .hero-cert-badge {
     top: 14px;
     right: 14px;
-    width: 108px;
-    padding: 8px 8px 15px;
-  }
-
-  .hero-cert-title {
-    font-size: 7px;
-  }
-
-  .hero-cert-logo {
-    font-size: 26px;
-  }
-
-  .hero-cert-school {
-    font-size: 6px;
-    letter-spacing: 0.14em;
-    padding: 4px 6px;
-  }
-
-  .hero-cert-ribbon {
-    width: 28px;
-    height: 18px;
-    bottom: -7px;
+    width: 104px;
   }
 
   .hero-image {
@@ -325,6 +247,6 @@
 
   .hero-scroll-indicator {
     left: 28px;
-    bottom: 20px;
+    bottom: 10px;
   }
 }

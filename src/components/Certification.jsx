@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import './Certification.css'
+import vlccBadge from '../assets/Nandi_VLCC_Tag.svg'
 
 function Certification() {
   const ref = useRef(null)
@@ -28,11 +29,7 @@ function Certification() {
     <section className="certification" ref={ref}>
       <p className="cert-eyebrow reveal">Professional Credentials</p>
       <div className="cert-frame reveal reveal-delay-1">
-        <div className="cert-badge">
-          <div className="cert-badge-logo">VLCC</div>
-          <div className="cert-badge-line" />
-          <div className="cert-badge-sub">Certified Professional</div>
-        </div>
+        <img className="cert-badge" src={vlccBadge} alt="VLCC School of Beauty certification badge" />
       </div>
       <p className="cert-caption reveal reveal-delay-2">Certified. Trusted. Experienced.</p>
     </section>

@@ -5,7 +5,7 @@
 }
 
 .trust-inline {
-  padding: 20px 0 0;
+  padding: 8px 0 0;
   border-bottom: 0;
   background: transparent;
   width: 100%;
@@ -82,7 +82,7 @@
   }
 
   .trust-inline {
-    padding: 12px 0 0;
+    padding: 6px 0 0;
   }
 
   .trust-inner {
@@ -92,7 +92,7 @@
 
   .trust-inline .trust-inner {
     align-items: stretch;
-    gap: 20px;
+    gap: 14px;
   }
 
   .trust-divider {
@@ -101,7 +101,9 @@
   }
 
   .trust-inline .trust-divider {
-    width: 100%;
+    width: 28px;
+    align-self: flex-start;
+    opacity: 0.55;
   }
 
   .trust-item {

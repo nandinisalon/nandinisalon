@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './Hero.css'
 import Trust from './Trust'
 import nandiniPhoto from '../assets/nandini-photo.png'
+import vlccBadge from '../assets/Nandi_VLCC_Tag.svg'
 
 function Hero() {
-  const [offsetY, setOffsetY] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setOffsetY(window.scrollY * 0.5)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
     <section className="hero">
-      <div className="hero-bg" style={{ transform: `translateY(${offsetY}px)` }} />
+      <div className="hero-bg" />
 
       <div className="hero-wrapper">
         <div className="hero-content">
@@ -36,10 +26,11 @@ function Hero() {
         <div className="hero-image-section">
           <div className="hero-image-placeholder">
             <div className="hero-cert-badge" aria-label="Trained by VLCC School of Beauty">
-              <div className="hero-cert-title">Trained by</div>
-              <div className="hero-cert-logo">VLCC</div>
-              <div className="hero-cert-school">School of Beauty</div>
-              <div className="hero-cert-ribbon" />
+              <img
+                className="hero-cert-badge-image"
+                src={vlccBadge}
+                alt="VLCC School of Beauty certification badge"
+              />
             </div>
             <img className="hero-image" src={nandiniPhoto} alt="Nandini" />
           </div>

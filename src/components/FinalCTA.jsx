@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import './FinalCTA.css'
+import primaryLogo from '../assets/Nandi_Primary_Logo.svg'
 
 function FinalCTA() {
   const ref = useRef(null)
@@ -26,6 +27,7 @@ function FinalCTA() {
 
   return (
     <section className="final-cta" ref={ref}>
+      <img className="final-watermark" src={primaryLogo} alt="" aria-hidden="true" />
       <h2 className="final-title reveal">
         Take your time.
         <br />

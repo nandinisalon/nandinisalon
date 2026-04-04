@@ -4,7 +4,7 @@ import './Trust.css'
 const trustItems = [
   { number: '15+', label: 'Years Experience' },
   { number: 'VLCC', label: 'Certified Professional', isItalic: true },
-  { number: '∞', label: 'Repeat Client Trust' }
+  { number: '∞', label: 'Repeat Client Trust' },
 ]
 
 function Trust({ inline = false }) {
@@ -36,9 +36,7 @@ function Trust({ inline = false }) {
         {trustItems.map((item, index) => (
           <React.Fragment key={index}>
             <div className={`trust-item reveal ${index > 0 ? `reveal-delay-${index}` : ''}`}>
-              <div className={`trust-number ${item.isItalic ? 'italic' : ''}`}>
-                {item.number}
-              </div>
+              <div className={`trust-number ${item.isItalic ? 'italic' : ''}`}>{item.number}</div>
               <div className="trust-label">{item.label}</div>
             </div>
             {index < trustItems.length - 1 && <div className="trust-divider" />}
