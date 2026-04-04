@@ -114,9 +114,6 @@ function Gallery() {
             Our<br />
             <em>Services</em>
           </h2>
-          <p className="gallery-subtitle">
-            Each service crafted with precision and care for your unique beauty needs.
-          </p>
         </div>
 
         <div className="gallery-grid">

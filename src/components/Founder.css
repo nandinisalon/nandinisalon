@@ -10,17 +10,24 @@
   max-width: 1120px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(280px, 0.88fr) minmax(320px, 1fr);
-  gap: 36px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3.6vw, 48px);
   align-items: stretch;
 }
 
 .founder-image-wrap {
+  width: 100%;
+  max-width: none;
+  justify-self: stretch;
+  align-self: stretch;
   position: relative;
-  aspect-ratio: 4/5;
+  top: 0;
+  aspect-ratio: auto;
+  min-height: 100%;
   overflow: hidden;
   border-radius: 28px;
   box-shadow: 0 28px 72px rgba(10, 10, 10, 0.14);
+  z-index: 1;
 }
 
 .founder-image-wrap::before {
@@ -42,6 +49,7 @@
 .founder-image-placeholder {
   width: 100%;
   height: 100%;
+  min-height: 100%;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 36%),
     linear-gradient(160deg, #2f2a26 0%, #1d1815 52%, #0a0a0a 100%);
@@ -124,11 +132,17 @@
 
 .founder-text {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  height: 100%;
 }
 
 .founder-copy-card {
   width: 100%;
+  max-width: none;
+  height: 100%;
   padding: 38px clamp(24px, 3vw, 42px);
   border: 1px solid rgba(212, 208, 203, 0.9);
   border-radius: 28px;
@@ -163,6 +177,7 @@
   letter-spacing: 0.01em;
   margin-bottom: 28px;
   color: var(--black);
+  overflow-wrap: anywhere;
 }
 
 .founder-quote em {
@@ -170,11 +185,12 @@
 }
 
 .founder-body {
-  font-size: 13px;
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 38px);
   font-weight: 300;
-  line-height: 1.9;
-  color: var(--mid);
-  max-width: 460px;
+  line-height: 1.55;
+  color: var(--black);
+  max-width: none;
   margin-bottom: 30px;
 }
 
@@ -194,6 +210,24 @@
   animation: slideInRight 0.8s ease-out 0.6s both;
 }
 
+@media (max-width: 1024px) {
+  .founder-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .founder-copy-card {
+    max-width: none;
+  }
+
+  .founder-image-wrap {
+    position: relative;
+    top: 0;
+    justify-self: stretch;
+    max-width: none;
+    aspect-ratio: 16 / 9;
+  }
+}
+
 @media (max-width: 768px) {
   .founder {
     padding: 16px 20px 40px;
@@ -205,6 +239,10 @@
   }
 
   .founder-image-wrap {
+    position: relative;
+    top: 0;
+    justify-self: stretch;
+    max-width: none;
     aspect-ratio: 4/3;
   }
 

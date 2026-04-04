@@ -65,6 +65,23 @@ function ServiceGallery() {
     []
   )
 
+  const renderVideoCard = (item, key, { duplicate = false, priority = false } = {}) => (
+    <figure className="service-video-card" key={key}>
+      <video
+        className="service-video-media"
+        src={item.video}
+        muted
+        loop
+        playsInline
+        autoPlay={!duplicate}
+        preload={priority ? 'auto' : duplicate ? 'none' : 'metadata'}
+      />
+      <figcaption className="service-video-card-copy">
+        <span className="service-gallery-card-note">{item.displayNumber}</span>
+      </figcaption>
+    </figure>
+  )
+
   useEffect(() => {
     const setupManualInfiniteScroll = (viewport, group) => {
       if (!viewport || !group) {
@@ -145,6 +162,58 @@ function ServiceGallery() {
     }
   }, [galleryItems.length, videoItems.length])
 
+  useEffect(() => {
+    if (!isVisible || !videoViewportRef.current) {
+      return () => {}
+    }
+
+    const viewport = videoViewportRef.current
+    const videos = Array.from(viewport.querySelectorAll('.service-video-media'))
+
+    if (!videos.length) {
+      return () => {}
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target
+          if (!(video instanceof HTMLVideoElement)) {
+            return
+          }
+
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.65) {
+            const playPromise = video.play()
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(() => {})
+            }
+          } else {
+            video.pause()
+          }
+        })
+      },
+      {
+        root: viewport,
+        threshold: [0.3, 0.65, 0.9],
+      }
+    )
+
+    videos.forEach((video) => observer.observe(video))
+
+    const primaryVideo = videoGroupRef.current?.querySelector('.service-video-media')
+    if (primaryVideo instanceof HTMLVideoElement) {
+      const playPromise = primaryVideo.play()
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {})
+      }
+    }
+
+    return () => {
+      observer.disconnect()
+      videos.forEach((video) => video.pause())
+    }
+  }, [isVisible, videoItems.length])
+
   return (
     <section className={`service-gallery ${isVisible ? 'visible' : ''}`}>
       <div className="service-gallery-inner">
@@ -218,58 +287,19 @@ function ServiceGallery() {
               <div className="service-video-track">
                 <div className="service-gallery-group" aria-hidden="true">
                   {videoItems.map((item) => (
-                    <figure className="service-video-card" key={`${item.id}-head-duplicate`}>
-                      <video
-                        className="service-video-media"
-                        src={item.video}
-                        muted
-                        loop
-                        playsInline
-                        autoPlay
-                        preload="metadata"
-                      />
-                      <figcaption className="service-video-card-copy">
-                        <span className="service-gallery-card-note">{item.displayNumber}</span>
-                      </figcaption>
-                    </figure>
+                    renderVideoCard(item, `${item.id}-head-duplicate`, { duplicate: true })
                   ))}
                 </div>
 
                 <div className="service-gallery-group" ref={videoGroupRef}>
-                  {videoItems.map((item) => (
-                    <figure className="service-video-card" key={item.id}>
-                      <video
-                        className="service-video-media"
-                        src={item.video}
-                        muted
-                        loop
-                        playsInline
-                        autoPlay
-                        preload="metadata"
-                      />
-                      <figcaption className="service-video-card-copy">
-                        <span className="service-gallery-card-note">{item.displayNumber}</span>
-                      </figcaption>
-                    </figure>
+                  {videoItems.map((item, index) => (
+                    renderVideoCard(item, item.id, { priority: index === 0 })
                   ))}
                 </div>
 
                 <div className="service-gallery-group" aria-hidden="true">
                   {videoItems.map((item) => (
-                    <figure className="service-video-card" key={`${item.id}-tail-duplicate`}>
-                      <video
-                        className="service-video-media"
-                        src={item.video}
-                        muted
-                        loop
-                        playsInline
-                        autoPlay
-                        preload="metadata"
-                      />
-                      <figcaption className="service-video-card-copy">
-                        <span className="service-gallery-card-note">{item.displayNumber}</span>
-                      </figcaption>
-                    </figure>
+                    renderVideoCard(item, `${item.id}-tail-duplicate`, { duplicate: true })
                   ))}
                 </div>
               </div>

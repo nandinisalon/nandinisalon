@@ -30,21 +30,6 @@ function Founder() {
   return (
     <section className="founder" ref={founderRef}>
       <div className="founder-inner">
-        <div
-          className="founder-image-wrap reveal"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          ref={imageRef}
-        >
-          <div className="founder-image-placeholder" style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }}>
-            <div className="image-placeholder-content">
-              <div className="founder-badge">
-                <span className="badge-icon">N</span>
-              </div>
-              <span className="founder-image-caption">Nandini | Founder</span>
-            </div>
-          </div>
-        </div>
         <div className="founder-text">
           <div className="founder-copy-card">
             <div className="founder-label reveal">The Story</div>
@@ -58,7 +43,8 @@ function Founder() {
               <br />
               independence, resilience,
               <br />
-              and care."</em>
+              and care.
+              </em>
             </blockquote>
             <p className="founder-body reveal reveal-delay-2">
               From sacrifice to strength - every detail is intentional.
@@ -70,6 +56,20 @@ function Founder() {
             <p className="founder-certification reveal reveal-delay-3">
               <em>VLCC Certified Professional</em>
             </p>
+          </div>
+        </div>
+        <div
+          className="founder-image-wrap reveal"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          ref={imageRef}
+        >
+          <div className="founder-image-placeholder" style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }}>
+            <div className="image-placeholder-content">
+              <div className="founder-badge">
+                <span className="badge-icon">N</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
